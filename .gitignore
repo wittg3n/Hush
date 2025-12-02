@@ -1,0 +1,18 @@
+# Flutter & Dart
+.dart_tool/
+.packages
+.pub-cache/
+build/
+android/
+ios/
+web/
+linux/
+macos/
+windows/
+coverage/
+*.lock
+
+# IDE
+.idea/
+.vscode/
+*.iml
