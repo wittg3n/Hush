@@ -12,7 +12,6 @@ class ShadTheme {
       brightness: Brightness.dark,
       scaffoldBackgroundColor: surface,
       colorScheme: const ColorScheme.dark(
-        background: surface,
         surface: surface,
         primary: Colors.white,
         onPrimary: Colors.black,
@@ -30,7 +29,8 @@ class ShadTheme {
         elevation: 0,
         foregroundColor: foreground,
       ),
-      cardTheme: CardTheme(
+      // فقط این بخش عوض شد 👇
+      cardTheme: CardThemeData(
         color: surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -62,11 +62,14 @@ class ShadTheme {
 }
 
 class ShadCard extends StatelessWidget {
-  const ShadCard({super.key, required this.child, this.padding})
-      : assert(padding == null || padding.isFinite);
+  const ShadCard({
+    super.key,
+    required this.child,
+    this.padding,
+  });
 
   final Widget child;
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +102,8 @@ class ShadButton extends StatelessWidget {
         style: FilledButton.styleFrom(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         ),
         onPressed: onPressed,
         icon: Icon(icon ?? Icons.play_arrow_rounded, size: 20),
@@ -126,7 +130,8 @@ class ShadGhostButton extends StatelessWidget {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           side: const BorderSide(color: Color(0xFF2A2A2A)),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
           foregroundColor: Colors.white,
         ),
         onPressed: onPressed,
@@ -137,7 +142,12 @@ class ShadGhostButton extends StatelessWidget {
 }
 
 class ShadSwitch extends StatelessWidget {
-  const ShadSwitch({super.key, required this.value, required this.onChanged, this.label});
+  const ShadSwitch({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.label,
+  });
 
   final bool value;
   final ValueChanged<bool> onChanged;
@@ -151,7 +161,7 @@ class ShadSwitch extends StatelessWidget {
         Switch(
           value: value,
           onChanged: onChanged,
-          activeColor: Colors.black,
+          activeThumbColor: Colors.black,
           activeTrackColor: Colors.white,
           inactiveThumbColor: Colors.white,
           inactiveTrackColor: const Color(0xFF2A2A2A),
@@ -159,7 +169,10 @@ class ShadSwitch extends StatelessWidget {
         if (label != null)
           Text(
             label!,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontWeight: FontWeight.w600),
           ),
       ],
     );
@@ -167,7 +180,11 @@ class ShadSwitch extends StatelessWidget {
 }
 
 class ShadPill extends StatelessWidget {
-  const ShadPill({super.key, required this.label, this.icon});
+  const ShadPill({
+    super.key,
+    required this.label,
+    this.icon,
+  });
 
   final String label;
   final IconData? icon;
@@ -186,7 +203,13 @@ class ShadPill extends StatelessWidget {
         children: [
           if (icon != null) Icon(icon, size: 16, color: Colors.white),
           if (icon != null) const SizedBox(width: 8),
-          Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+          Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );
