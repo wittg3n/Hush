@@ -82,8 +82,13 @@ class _HushHomeState extends State<HushHome> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hush', style: TextStyle(fontWeight: FontWeight.w700)),
-        actions: const [Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: ShadPill(label: 'Black & White'))],
+        title:
+            const Text('Hush', style: TextStyle(fontWeight: FontWeight.w700)),
+        actions: const [
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: ShadPill(label: 'Black & White'))
+        ],
       ),
       body: SafeArea(
         child: LayoutBuilder(
@@ -100,8 +105,9 @@ class _HushHomeState extends State<HushHome> {
                   Expanded(
                     child: Flex(
                       direction: isWide ? Axis.horizontal : Axis.vertical,
-                      crossAxisAlignment:
-                          isWide ? CrossAxisAlignment.start : CrossAxisAlignment.stretch,
+                      crossAxisAlignment: isWide
+                          ? CrossAxisAlignment.start
+                          : CrossAxisAlignment.stretch,
                       children: [
                         Expanded(
                           flex: 3,
@@ -112,22 +118,29 @@ class _HushHomeState extends State<HushHome> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text('Media focus',
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .titleLarge
-                                                    ?.copyWith(fontWeight: FontWeight.w700)),
+                                                    ?.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w700)),
                                             const SizedBox(height: 4),
-                                            Text('Pick the app we should pause or duck when other audio appears.',
+                                            Text(
+                                                'Pick the app we should pause or duck when other audio appears.',
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .bodyMedium
-                                                    ?.copyWith(color: Colors.grey[400])),
+                                                    ?.copyWith(
+                                                        color:
+                                                            Colors.grey[400])),
                                           ],
                                         ),
                                         ShadSwitch(
@@ -136,7 +149,8 @@ class _HushHomeState extends State<HushHome> {
                                               ? 'Pause instead of duck'
                                               : 'Lower volume',
                                           onChanged: (value) {
-                                            setState(() => _service.pauseInsteadOfDucking = value);
+                                            setState(() => _service
+                                                .pauseInsteadOfDucking = value);
                                             _pushLog(value
                                                 ? 'Configured to pause playback'
                                                 : 'Configured to lower volume');
@@ -149,10 +163,12 @@ class _HushHomeState extends State<HushHome> {
                                       spacing: 12,
                                       runSpacing: 12,
                                       children: [
-                                        ...sessions.map((session) => _SessionTile(
-                                              session: session,
-                                              onSelect: () => _selectSession(session),
-                                            )),
+                                        ...sessions
+                                            .map((session) => _SessionTile(
+                                                  session: session,
+                                                  onSelect: () =>
+                                                      _selectSession(session),
+                                                )),
                                       ],
                                     ),
                                     const SizedBox(height: 24),
@@ -160,17 +176,23 @@ class _HushHomeState extends State<HushHome> {
                                       children: [
                                         Expanded(
                                           child: ShadButton(
-                                            label: _service.isMonitoring ? 'Pause monitoring' : 'Start monitoring',
+                                            label: _service.isMonitoring
+                                                ? 'Pause monitoring'
+                                                : 'Start monitoring',
                                             icon: _service.isMonitoring
-                                                ? Icons.pause_circle_filled_rounded
-                                                : Icons.play_circle_fill_rounded,
+                                                ? Icons
+                                                    .pause_circle_filled_rounded
+                                                : Icons
+                                                    .play_circle_fill_rounded,
                                             onPressed: _startOrStopMonitoring,
                                           ),
                                         ),
                                         const SizedBox(width: 12),
                                         Expanded(
                                           child: ShadGhostButton(
-                                            label: _service.target.isPlaying ? 'Pause music' : 'Resume music',
+                                            label: _service.target.isPlaying
+                                                ? 'Pause music'
+                                                : 'Resume music',
                                             onPressed: _togglePlayback,
                                           ),
                                         ),
@@ -185,16 +207,23 @@ class _HushHomeState extends State<HushHome> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text('Live status',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium
-                                                ?.copyWith(fontWeight: FontWeight.w700)),
+                                                ?.copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w700)),
                                         ShadPill(
-                                          label: _service.isMonitoring ? 'Monitoring' : 'Idle',
-                                          icon: _service.isMonitoring ? Icons.circle : Icons.stop_circle_outlined,
+                                          label: _service.isMonitoring
+                                              ? 'Monitoring'
+                                              : 'Idle',
+                                          icon: _service.isMonitoring
+                                              ? Icons.circle
+                                              : Icons.stop_circle_outlined,
                                         ),
                                       ],
                                     ),
@@ -214,7 +243,8 @@ class _HushHomeState extends State<HushHome> {
                             ],
                           ),
                         ),
-                        SizedBox(width: isWide ? 16 : 0, height: isWide ? 0 : 16),
+                        SizedBox(
+                            width: isWide ? 16 : 0, height: isWide ? 0 : 16),
                         Expanded(
                           flex: 2,
                           child: ShadCard(
@@ -222,28 +252,34 @@ class _HushHomeState extends State<HushHome> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('Activity log',
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleMedium
-                                            ?.copyWith(fontWeight: FontWeight.w700)),
-                                    ShadGhostButton(label: 'Clear', onPressed: () => setState(_log.clear)),
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w700)),
+                                    ShadGhostButton(
+                                        label: 'Clear',
+                                        onPressed: () => setState(_log.clear)),
                                   ],
                                 ),
                                 const SizedBox(height: 12),
                                 Expanded(
                                   child: ListView.separated(
                                     itemCount: _log.length,
-                                    separatorBuilder: (_, __) => const Divider(),
+                                    separatorBuilder: (_, __) =>
+                                        const Divider(),
                                     itemBuilder: (context, index) {
                                       final entry = _log[index];
                                       return Text(entry,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium
-                                              ?.copyWith(color: Colors.grey[300]));
+                                              ?.copyWith(
+                                                  color: Colors.grey[300]));
                                     },
                                   ),
                                 ),
@@ -279,9 +315,13 @@ class _SessionTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: session.isTarget ? Colors.white : const Color(0xFF161616),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: session.isTarget ? Colors.white : const Color(0xFF2A2A2A)),
+        border: Border.all(
+            color: session.isTarget ? Colors.white : const Color(0xFF2A2A2A)),
         boxShadow: session.isTarget
-            ? [const BoxShadow(color: Colors.white24, blurRadius: 24, spreadRadius: 1)]
+            ? [
+                const BoxShadow(
+                    color: Colors.white24, blurRadius: 24, spreadRadius: 1)
+              ]
             : null,
       ),
       child: Column(
@@ -289,15 +329,13 @@ class _SessionTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.music_note_rounded, color: session.isTarget ? Colors.black : Colors.white),
+              Icon(Icons.music_note_rounded,
+                  color: session.isTarget ? Colors.black : Colors.white),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
                   session.name,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: session.isTarget ? Colors.black : Colors.white,
                         fontWeight: FontWeight.w700,
                       ),
@@ -319,7 +357,8 @@ class _SessionTile extends StatelessWidget {
               Expanded(
                 child: session.isTarget
                     ? ShadGhostButton(label: 'Selected', onPressed: null)
-                    : ShadGhostButton(label: 'Make target', onPressed: onSelect),
+                    : ShadGhostButton(
+                        label: 'Make target', onPressed: onSelect),
               ),
             ],
           ),
@@ -338,13 +377,19 @@ class _HeroText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Stay focused. Keep sound civil.',
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800),
+          'Stay focused. Keep sound civil',
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium
+              ?.copyWith(fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 8),
         Text(
           'Hush watches for competing audio and pauses or lowers your chosen player so meetings stay distraction-free.',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey[400]),
+          style: Theme.of(context)
+              .textTheme
+              .bodyLarge
+              ?.copyWith(color: Colors.grey[400]),
         ),
       ],
     );
